@@ -2,12 +2,12 @@
 #include <stdlib.h>
 //s == source
 void print_matrix(int** s, int row, int col);
-void addition_matrix(int** s1, int** s2, int** out, int row, int col);
-void subtraction_matrix(int** s1, int** s2, int** out, int row, int col);
-void multiply_matrix(int** s1, int** s2, int** out, int row, int col);
-void transpose_matrix(int** s, int** out, int row, int col);
+void addition_matrix(int** s1, int** s2, int row, int col);
+void subtraction_matrix(int** s1, int** s2, int row, int col);
+void multiply_matrix(int** s1, int** s2, int row, int col);
+void transpose_matrix(int** s, int row, int col);
 void free_matrix(int** matrix, int row, int col);
-
+void set_out_matrix(int** out, int row, int col);
 int main (void) {
     //행렬 A, B, C, 정수 row, col 선언
     int **A, **B, **C, row, col;
@@ -36,6 +36,15 @@ int main (void) {
     }
     return 0;
 }
+void set_out_matrix(int** out, int row, int col) {
+    if (out != NULL) {
+        //out 행렬이 NULL이 아니면 메모리를 해제한다.
+        free_matrix(out, row, col);
+    }
+    out = (int**)malloc(sizeof(int*) * row);
+    for (int i = 0; i < row; i++)
+        out[i] = (int*)malloc(sizeof(int) * col);
+}
 //행렬을 출력하는 함수
 void print_matrix(int** s, int row, int col) {
     //행을 반복하는 반복문
@@ -46,20 +55,38 @@ void print_matrix(int** s, int row, int col) {
             printf(j == col - 1 ? "%d\n" : "%d ", s[i][j]);
 }
 //행렬의 덧셈을 out 행렬에 저장하는 함수
-void addition_matrix(int** s1, int** s2, int** out, int row, int col) {
+void addition_matrix(int** s1, int** s2, int row, int col) {
+    int **out;
+    set_out_matrix(out, row, col);
     //행을 반복하는 반복문
     for (int i = 0; i < row; i++)
         //열을 반복하는 반복문
         for (int j = 0; j < col; j++)
             //행렬의 각 원소를 더하여 out에 저장한다.
             out[i][j] = s1[i][j] + s2[i][j];
+    print_matrix(out, row, col);
 }
 //행렬의 뺄셈을 out 행렬에 저장하는 함수
-void subtraction_matrix(int** s1, int** s2, int** out, int row, int col) {
+void subtraction_matrix(int** s1, int** s2, int row, int col) {
+    int **out;
+    set_out_matrix(out, row, col);
     //행을 반복하는 반복문
     for (int i = 0; i < row; i++)
         //열을 반복하는 반복문
         for (int j = 0; j < col; j++)
             //행렬의 각 원소를 빼서 out에 저장한다.
             out[i][j] = s1[i][j] - s2[i][j];
+    print_matrix(out, row, col);
+}
+//전치 행렬을 out 행렬에 저장하는 함수
+void transpose_matrix(int** s, int row, int col) {
+    int **out;
+    set_out_matrix(out, col, row);
+    //행을 반복하는 반복문
+    for (int i = 0; i < row; i++)
+        //열을 반복하는 반복문
+        for (int j = 0; j < col; j++)
+            //행렬의 각 원소를 전치하여 out에 저장한다.
+            out[j][i] = s[i][j];
+    print_matrix(out, col, row);
 }
