@@ -45,3 +45,12 @@ void print_matrix(int** s, int row, int col) {
             //마지막 열이면 줄을 바꾼다.
             printf(j == col - 1 ? "%d\n" : "%d ", s[i][j]);
 }
+//행렬의 덧셈을 out 행렬에 저장하는 함수
+void addition_matrix(int** s1, int** s2, int** out, int row, int col) {
+    //행을 반복하는 반복문
+    for (int i = 0; i < row; i++)
+        //열을 반복하는 반복문
+        for (int j = 0; j < col; j++)
+            //행렬의 각 원소를 더하여 out에 저장한다.
+            out[i][j] = s1[i][j] + s2[i][j];
+}
