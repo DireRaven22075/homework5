@@ -54,3 +54,12 @@ void addition_matrix(int** s1, int** s2, int** out, int row, int col) {
             //행렬의 각 원소를 더하여 out에 저장한다.
             out[i][j] = s1[i][j] + s2[i][j];
 }
+//행렬의 뺄셈을 out 행렬에 저장하는 함수
+void subtraction_matrix(int** s1, int** s2, int** out, int row, int col) {
+    //행을 반복하는 반복문
+    for (int i = 0; i < row; i++)
+        //열을 반복하는 반복문
+        for (int j = 0; j < col; j++)
+            //행렬의 각 원소를 빼서 out에 저장한다.
+            out[i][j] = s1[i][j] - s2[i][j];
+}
