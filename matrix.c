@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-void print_matrix(int** matrix, int row, int col);
-void addition_matrix(int** source1, int** source2, int** out, int row, int col);
-void subtraction_matrix(int** source1, int** source2, int** out, int row, int col);
-void multiply_matrix(int** source1, int** source2, int** out, int row, int col);
-void transpose_matrix(int** source1, int** out, int row, int col);
+//s == source
+void print_matrix(int** s, int row, int col);
+void addition_matrix(int** s1, int** s2, int** out, int row, int col);
+void subtraction_matrix(int** s1, int** s2, int** out, int row, int col);
+void multiply_matrix(int** s1, int** s2, int** out, int row, int col);
+void transpose_matrix(int** s, int** out, int row, int col);
 void free_matrix(int** matrix, int row, int col);
 
 int main (void) {
@@ -35,6 +36,12 @@ int main (void) {
     }
     return 0;
 }
-void print_matrix(int** matrix, int row, int col) {
-
+//행렬을 출력하는 함수
+void print_matrix(int** s, int row, int col) {
+    //행을 반복하는 반복문
+    for (int i = 0; i < row; i++)
+        //열을 반복하는 반복문
+        for (int j = 0; j < col; j++)
+            //마지막 열이면 줄을 바꾼다.
+            printf(j == col - 1 ? "%d\n" : "%d ", s[i][j]);
 }
