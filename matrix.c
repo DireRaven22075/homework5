@@ -119,3 +119,8 @@ void multiply_matrix(int** s1, int** s2, int row1, int col1, int row2, int col2)
     print_matrix(out, row1, col2);
     free_matrix(out, row1, col2);
 }
+void free_matrix(int** s, int row, int col) {
+    for (int i = 0; i < row; i++)
+        free(s[i]);
+    free(s);
+}
