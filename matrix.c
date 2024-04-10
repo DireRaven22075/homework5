@@ -124,9 +124,12 @@ void multiply_matrix(int** s1, int** s2, int row1, int col1, int row2, int col2)
         printf("곱셈 불가\n");
         return;
     }
+    //곱셈 결과를 저장할 out 행렬을 동적할당한다.
     int** out = (int**)malloc(sizeof(int*) * row1);
     for (int i = 0; i < row1; i++)
         out[i] = (int*)malloc(sizeof(int) * col2);
+
+    //행렬의 곱셈을 수행하는 반복문
     for (int i = 0; i < row1; i++) {
         for (int j = 0; j < col2; j++) {
             out[i][j] = 0; 
